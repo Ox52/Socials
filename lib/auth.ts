@@ -38,9 +38,9 @@ export async function getSession(): Promise<SessionPayload | null> {
   }
 }
 
-export function protectRoute() {
+export  function protectRoute() {
   const session = getSession();
-  if (!session) {
+  if  (!session) {
     redirect("/login");
   }
   return session;
