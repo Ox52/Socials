@@ -15,7 +15,7 @@ export async function createSession(payload: SessionPayload) {
   (await cookies()).set(COOKIE_NAME, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    maxAge: 60 * 60 * 24 * 7, // 1 week
+    maxAge: 60 * 60 * 24 * 7,
     path: "/",
   });
 }
@@ -38,9 +38,9 @@ export async function getSession(): Promise<SessionPayload | null> {
   }
 }
 
-export  function protectRoute() {
-  const session = getSession();
-  if  (!session) {
+export async function protectRoute() {
+  const session = await getSession();
+  if (!session) {
     redirect("/login");
   }
   return session;
